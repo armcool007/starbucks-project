@@ -50,6 +50,11 @@ stage("Sonarqube Analysis "){
   } 
 }
 
+✅ -D = Define (property set karna)
+  -Dsonar.someProperty=value = SonarQube ko koi setting dena.
+    -D → Define property
+    sonar.xxx → SonarQube ki property
+
 ✅ 1. stage("Sonarqube Analysis ")
 Iska matlab:
 👉 “Ab hum SonarQube se code ka analysis (scan) karenge.”
