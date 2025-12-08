@@ -39,3 +39,34 @@ Hidden files
 Koi bhi bacha hua code
 sab delete ho jata hai.
 Workspace bilkul fresh ho jata hai, jaise naya build start ho raha
+
+####################################################################################################################################################################
+
+stage("Sonarqube Analysis "){ 
+  steps{ 
+    withSonarQubeEnv('SonarQube') {
+      sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=starbucks \ -Dsonar.projectKey=starbucks ''' 
+    } 
+  } 
+}
+
+✅ 1. stage("Sonarqube Analysis ")
+Iska matlab:
+👉 “Ab hum SonarQube se code ka analysis (scan) karenge.”
+
+✅ 2. withSonarQubeEnv('SonarQube')
+Iska matlab:
+👉 “SonarQube ke server ka environment use karo.”
+Jenkins me jo SonarQube naam ka server configure hai,
+uske URL, token, login details sab is block ke andar available ho jaate hain.
+
+✅ 3. sh ''' $SCANNER_HOME/bin/sonar-scanner ...
+Iska matlab:
+👉 “Sonar-scanner command chalao.”
+Yeh command code scan karta hai aur report SonarQube server ko bhej deta hai.
+🟢 4. Scanner command ke options:
+🔸 -Dsonar.projectName=starbucks
+👉 SonarQube me project ka naam “starbucks” rakho.
+🔸 -Dsonar.projectKey=starbucks
+👉 Project ka unique key “starbucks” ho.
+(project key = SonarQube me ek unique ID)
