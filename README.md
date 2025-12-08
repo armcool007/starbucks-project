@@ -22,3 +22,20 @@ Recipient Management:
 Committer ko email bhejo, ya specific user groups ko—flexible recipient list.
 Pre-send Script Support:
 Groovy script se email content ya recipients dynamically decide kar sakte ho.
+
+
+#######################################################################################
+
+                                                            "cleanWs()" ka bahut hi simple matlab:
+
+✅ Jenkins workspace ko poora clean (saaf) kar dena
+Yani:
+
+Purane build ke files
+Temporary files
+Logs
+Artifacts
+Hidden files
+Koi bhi bacha hua code
+sab delete ho jata hai.
+Workspace bilkul fresh ho jata hai, jaise naya build start ho raha
