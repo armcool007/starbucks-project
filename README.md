@@ -75,3 +75,31 @@ Yeh command code scan karta hai aur report SonarQube server ko bhej deta hai.
 🔸 -Dsonar.projectKey=starbucks
 👉 Project ka unique key “starbucks” ho.
 (project key = SonarQube me ek unique ID)
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+stage("quality gate"){
+  steps {
+    script {
+      waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token' 
+    } 
+  }
+}
+✅ 1. waitForQualityGate
+Ye Jenkins ko bolta hai:
+“SonarQube ka final verdict (Pass/Fail) aane tak ruk jao.”
+Code likhne se pehle SonarQube scan ho chuka hota hai.
+Jab tak SonarQube result nahi deta → Jenkins yahan rukta hai.
+
+✅ 2. abortPipeline: false ka matlab
+Agar abortPipeline: true hota:
+➡️ Agar SonarQube Quality Gate Fail → Puri pipeline ko turant STOP kar deta.
+But tumne likha hai:
+abortPipeline: false
+➡️ Matlab:
+Quality Gate fail hone par bhi pipeline FAIL nahi karega — pipeline aage chalegi.
+
+✅ 3. credentialsId: 'Sonar-token' ka matlab
+Jenkins me tumne ek secret token store kiya hoga named:
+Sonar-token
+Ye token Jenkins ko SonarQube se baat karne deta hai.
+Without token → Jenkins SonarQube se result fetch nahi kar sakta.
