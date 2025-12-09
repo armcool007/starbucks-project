@@ -108,3 +108,64 @@ Without token → Jenkins SonarQube se result fetch nahi kar sakta.
 
 Trivy ko hamesha Jenkins machine (Jenkins agent) par install hona chahiye.
 SonarQube machine par Trivy install karne ki bilkul zaroorat nahi hai.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+✔ post { always { ... }}
+Matlab pipeline ke last me hamesha yeh part chalega
+(fail ho ya success → fark nahi padhta)
+def buildStatus = currentBuild.currentResult
+
+✔ buildStatus
+Yeh current build ka result store karta hai:
+SUCCESS
+FAILURE
+UNSTABLE
+ABORTED
+def buildUser = currentBuild.getBuildCauses('hudson.model.Cause$UserIdCause')[0]?.userId ?: 'Github User'
+
+✔ buildUser
+Yeh find karta hai kisne build start kiya
+Manual run → Jenkins user ka naam
+GitHub push → "Github User"
+?: 'Github User' matlab:
+Agar user nahi mila → default "Github User"
+📩 EMAIL SENDING PART
+emailext (
+    subject: "Pipeline ${buildStatus}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+✔ Email subject
+Example:
+Pipeline SUCCESS: starbucks-pipeline #12
+
+body: """
+    <p>This is a Jenkins starbucks CICD pipeline status.</p>
+    <p>Project: ${env.JOB_NAME}</p>
+    <p>Build Number: ${env.BUILD_NUMBER}</p>
+    <p>Build Status: ${buildStatus}</p>
+    <p>Started by: ${buildUser}</p>
+    <p>Build URL: <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+""",
+
+✔ Email body (HTML format)
+Email me yeh details jayegi:
+Project name
+Build number
+Build status
+Kisne start kiya
+Build URL (clickable)
+to: 'mohdaseemakram19@gmail.com',
+from: 'mohdaseemakram19@gmail.com',
+replyTo: 'mohdaseemakram19@gmail.com',
+mimeType: 'text/html',
+
+✔ Receiver / sender email config
+to: → jisko email jaayegi
+from: → kaun bhej raha
+replyTo: → reply kahan aaye
+mimeType: text/html → HTML formatting allow (bold, colors etc.)
+attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+
+✔ Email ke sath kaunse files attach honge
+Trivy file-system scan report
+Trivy image scan report
+Email ke sath PDFs ki tarah attach ho jayenge.
