@@ -103,3 +103,8 @@ Jenkins me tumne ek secret token store kiya hoga named:
 Sonar-token
 Ye token Jenkins ko SonarQube se baat karne deta hai.
 Without token → Jenkins SonarQube se result fetch nahi kar sakta.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Trivy ko hamesha Jenkins machine (Jenkins agent) par install hona chahiye.
+SonarQube machine par Trivy install karne ki bilkul zaroorat nahi hai.
