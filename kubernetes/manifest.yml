@@ -26,10 +26,11 @@ kind: Service
 metadata:
   name: starbucks-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: starbucks
   ports:
   - port: 80
     targetPort: 3000
+
 
