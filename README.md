@@ -24,7 +24,24 @@ Pre-send Script Support:
 Groovy script se email content ya recipients dynamically decide kar sakte ho.
 
 
-#######################################################################################
+######################################################################################################################################################################
+environment {
+        SCANNER_HOME=tool 'sonar-scanner'
+    }
+1️⃣ environment { }
+Ye block environment variables define karne ke liye hota hai
+Ye variables poori pipeline ke sab stages me available hote hain
+2️⃣ SCANNER_HOME
+Ye variable ka naam hai
+Tum koi bhi naam rakh sakte ho (mostly capital letters use karte hain)
+📌 Example:
+SCANNER_HOME=/opt/sonar-scanner
+3️⃣ tool 'sonar-scanner'
+tool Jenkins ka built-in function hai
+Ye Jenkins ke Global Tool Configuration se tool ka path nikalta hai
+👉 'sonar-scanner' tool ka exact name hona chahiye
+(Jenkins → Manage Jenkins → Global Tool Configuration)
+######################################################################################################################################################################
 
                                                             "cleanWs()" ka bahut hi simple matlab:
 
